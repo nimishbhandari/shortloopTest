@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Hour from "./component/Hour";
+import Meet from "./component/Meet";
+import { day } from "./config/Day";
+import { meeting } from "./config/meetings";
 
-function App() {
+const App = () => {
+  const meetings = meeting.meetings;
+  const hourly = day;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {hourly.map((elem, i) => {
+        return <Hour key={i} hour={elem} />;
+      })}
+
+      {meetings.map((elem, i) => {
+        return (
+          <Meet
+            key={i}
+            start={elem.startTime}
+            end={elem.endTime}
+            color={elem.color}
+          />
+        );
+      })}
     </div>
   );
-}
+};
 
 export default App;
